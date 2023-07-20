@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Inheritance and Prototype</title>
+</head>
+<body>
+    <h1 class="heading">Inheritance and Prototype </h1>
+    <h3 class="Que">Q.1 - Create 2 objects - parent and child. Attach methods to parent and use those methods in child object using parents prototype</h3>
+    <pre id="text">Ans - function Parent(name) {
+        this.name = name;
+      }
+      Parent.prototype.print = function() {
+        console.log(`Hii, I am  ${this.name}`);
+      }
+      function Child(name) {
+        Parent.call(this, name);
+      }
+      Child.prototype = Object.create(Parent.prototype);
+      const child = new Child('Amina');
+      child.print();
+       
+    </pre>
+    <p>Here, we create a Parent object constructor which accepts a name parameter, and used the print to the Parent object's prototype. then, we create a Child object constructor, to set the name property on the Child object.
+        after set property to Child object, we use Object, which create to inherit from the Parent object's prototype, which allows the Child object to access the print method attached to the Parent object's prototype.
+        AtLast, there is a new instance of the Child object with the name "Amina", Print is inherited from the Parent.object's prototype, it has access to the name property on the Child object.</p>
+    <h3 class="Que">Q.2 -Write code to explain prototype chaining </h3>
+    <pre id="text">Ans - const plusGFather = {
+        sayHi : function() {
+            console.log(`Hey Plus GFather Say Hi`);
+        }
+    }
+    const GFather = Object.create(plusGFather)
+    
+    GFather.sayHello = function() {
+            console.log(`Hey GFather Say Hello`);
+    }
+    
+    const Father = Object.create(GFather)
+    
+    Father.sayHey = function() {
+        console.log(`Hey father Say Hey...`);
+    }
+    
+    const child = Object.create(Father);
+    
+    console.log(child);
+    child.sayHi();
+    child.sayHey();
+    child.sayHello();
+       
+    </pre>
+    <p>Explanation: Here we are creating three function anonymous function and here 1st anonymous storing assign them into different variables such as plusGFather then  The plusGFather object's prototype is set to Object.create(Parent.prototype), which inherits the greet method from the Parent object's prototype. and same for another anonymous.and each function assign into another variable that inherit the function by using . which is membership. and at last  and at last The Father object's prototype is set to Object. and assign it into a child variable. and console them.
+
+    </p>
+    <h3 class="Que">Q.3 - Add a method to calculate sum of all elements in Array in array's protype, use that method to calculate sum
+        for multiple arrays</h3>
+    <pre id="text">Ans - Array.prototype.sum = function() {
+        return this.reduce((acc, curr) => acc + curr, 0);
+      }
+      
+      
+      const array1 = [5, 4, 3, 2, 1];
+      const array2 = [50, 60, 70];
+      const array3 = [500, 600, 700, 800];
+      
+      console.log(array1.sum()); 
+      console.log(array2.sum()); 
+      console.log(array3.sum());
+       
+    </pre>
+    <p>Explanation: <br> Here, we used a method called sum to the Array object's prototype using the Array.prototype syntax. Then sum method which is  used the reduce method to calculate the sum of all elements in the array.  and then make arrays and assigned in variables named as array1, array2, and array3. We use the sum() is used to calculate the sum of all elements in each array. </p>
+
+    <h3 class="Que">Q.4 - Write a JavaScript function to retrieve all the names of object's own and inherited properties.</h3>
+    <pre id="text">Ans - function allKeys(obj) {
+        if (!isObject(obj)) return [];
+        var keys = [];
+        for (var key in obj) keys.push(key);
+        return keys;
+    }
+    function isObject(obj) 
+    {
+        var type = typeof obj;
+        return type === 'function' || type === 'object' && !!obj;
+      }
+    function Student(name) {
+      this.name = name;
+    }
+    Student.prototype.rollno = true;
+    console.log(allKeys(new Student("Amina")));
+       
+    </pre>
+    <p>Output: [ 'name', 'rollno' ]</p>
+</body>
+<script src="./script.js"></script>
+</html>
